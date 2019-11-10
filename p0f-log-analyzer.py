@@ -80,6 +80,15 @@ with open(sys.argv[1]) as f:
 				if os not in global_data[ip].get("os_matches") and os != "???":
 					global_data[ip]["os_matches"].append(os)
 
+			# fill in distance info
+			if not global_data[ip].get("distances"):
+				global_data[ip]["distances"] = []
+				if dist != "???":
+					global_data[ip]["distances"].append(dist)
+			else:
+				if dist not in global_data[ip].get("distances") and dist != "???":
+					global_data[ip]["distances"].append(dist)
+
 		elif "mtu" in mod: #mod is mtu
 			link = line.split("|")[4].split("=")[1]
 			mtu = line.split("|")[5].split("=")[1].rstrip()
@@ -121,9 +130,9 @@ with open(sys.argv[1]) as f:
 
 # summary
 
-print ("total IPs found:", len(global_data))
+
 for k in global_data:
 	print(json.dumps({k: global_data[k]}, indent=4, sort_keys=True))
 
-
+sys.stderr.write("total IPs found: " + str(len(global_data)) + "\n")
 
