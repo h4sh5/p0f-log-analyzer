@@ -10,7 +10,7 @@ python p0f-log-analyzer.py <path to log>
 example output (of a single IP, blurred out)
 ```
 {
-    "184.105.xxx.xx": {
+    "184.105.xxx.xxx": {
         "first_seen": "2019/11/10 08:49:57",
         "last_seen": "2019/11/10 08:49:57",
         "links": [
