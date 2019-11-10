@@ -29,7 +29,11 @@ dict = { IP : dict{
 	uptimes,
 	raw_freqs,
 	first_seen,
-	last_seen
+	last_seen,
+	apps,
+	http_sigs,
+	langs
+
 	}
 }}
 
@@ -101,6 +105,29 @@ with open(sys.argv[1]) as f:
 				global_data[ip]["mtus"] = [mtu]
 			else:
 				update_list(global_data[ip]["mtus"], mtu)
+
+		elif "http" in mod:
+			app = line.split("|")[4].split("=")[1]
+			lang = app = line.split("|")[5].split("=")[1]
+			
+
+			if not global_data[ip].get("apps"):
+				global_data[ip]["apps"] = [app]
+			else:
+				update_list(global_data[ip]["apps"], app)
+
+			if not global_data[ip].get("langs"):
+				global_data[ip]["langs"] = [lang]
+			else:
+				update_list(global_data[ip]["langs"], lang)
+
+			http_sig = line.split(":")[-1]
+			if not global_data[ip].get("http_sigs"):
+				global_data[ip]["http_sigs"] = [http_sig]
+			else:
+				update_list(global_data[ip]["http_sigs"], http_sig)
+
+
 
 
 		elif "uptime" in mod:
