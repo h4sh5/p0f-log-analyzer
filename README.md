@@ -10,9 +10,12 @@ python p0f-log-analyzer.py <path to log>
 example output (of a single IP, blurred out)
 ```
 {
-    "184.105.xxx.xxx": {
-        "first_seen": "2019/11/10 08:49:57",
-        "last_seen": "2019/11/10 08:49:57",
+        "distances": [
+            "19"
+        ],
+        "first_seen": "2019/11/09 22:51:50",
+        "ip": "177.38.xxx.xxx",
+        "last_seen": "2019/11/09 22:54:19",
         "links": [
             "Ethernet or modem"
         ],
@@ -20,17 +23,15 @@ example output (of a single IP, blurred out)
             "1500"
         ],
         "os_matches": [
-            "Linux 2.2.x-3.x"
-        ],
-        "raw_freqs": [
-            "252.38 Hz"
+            "Windows 7 or 8"
         ],
         "types": [
             "cli"
-        ],
-        "uptimes": [
-            "15 days 12 hrs 44 min (modulo 198 days)"
         ]
     }
-}
+
 ```
+
+
+using https://sqlify.io/ to convert the JSON output to SQLite/CSV works very well!
+

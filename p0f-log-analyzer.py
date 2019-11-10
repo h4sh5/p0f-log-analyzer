@@ -63,6 +63,7 @@ with open(sys.argv[1]) as f:
 
 		if not global_data.get(ip):
 			global_data[ip] = {}
+			global_data[ip]["ip"] = ip
 
 		if "syn" in mod: #TCP mode
 			os = line.split("|")[4].split("=")[1]
@@ -157,10 +158,12 @@ with open(sys.argv[1]) as f:
 		# print (ip, global_data[ip])
 
 # summary
-
-
+json_dict = []
 for k in global_data:
-	print(json.dumps({k: global_data[k]}, indent=4, sort_keys=True))
+	json_dict.append(global_data[k])
+
+# for k in global_data:
+print(json.dumps(json_dict, indent=4, sort_keys=True))
 
 sys.stderr.write("total IPs found: " + str(len(global_data)) + "\n")
 
