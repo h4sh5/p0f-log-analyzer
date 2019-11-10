@@ -108,18 +108,19 @@ with open(sys.argv[1]) as f:
 
 		elif "http" in mod:
 			app = line.split("|")[4].split("=")[1]
-			lang = app = line.split("|")[5].split("=")[1]
+			lang = line.split("|")[5].split("=")[1]
 			
+			if app != "???" and app != "none":
+				if not global_data[ip].get("apps"):
+					global_data[ip]["apps"] = [app]
+				else:
+					update_list(global_data[ip]["apps"], app)
 
-			if not global_data[ip].get("apps"):
-				global_data[ip]["apps"] = [app]
-			else:
-				update_list(global_data[ip]["apps"], app)
-
-			if not global_data[ip].get("langs"):
-				global_data[ip]["langs"] = [lang]
-			else:
-				update_list(global_data[ip]["langs"], lang)
+			if lang != "none":
+				if not global_data[ip].get("langs"):
+					global_data[ip]["langs"] = [lang]
+				else:
+					update_list(global_data[ip]["langs"], lang)
 
 			http_sig = line.split(":")[-1]
 			if not global_data[ip].get("http_sigs"):
