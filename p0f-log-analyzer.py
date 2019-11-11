@@ -63,7 +63,7 @@ with open(sys.argv[1]) as f:
 
 		if not global_data.get(ip):
 			global_data[ip] = {}
-			global_data[ip]["ip"] = ip
+		
 
 		if "syn" in mod: #TCP mode
 			os = line.split("|")[4].split("=")[1]
@@ -97,10 +97,11 @@ with open(sys.argv[1]) as f:
 		elif "mtu" in mod: #mod is mtu
 			link = line.split("|")[4].split("=")[1]
 			mtu = line.split("|")[5].split("=")[1].rstrip()
-			if not global_data[ip].get("links"):
-				global_data[ip]["links"] = [link]
-			else:
-				update_list(global_data[ip]["links"], link)
+			if link != "???":
+				if not global_data[ip].get("links"):
+					global_data[ip]["links"] = [link]
+				else:
+					update_list(global_data[ip]["links"], link)
 
 			if not global_data[ip].get("mtus"):
 				global_data[ip]["mtus"] = [mtu]
@@ -155,6 +156,7 @@ with open(sys.argv[1]) as f:
 			# update last seen
 			global_data[ip]["last_seen"] = last_seen
 
+		global_data[ip]["addr"] = ip
 		# print (ip, global_data[ip])
 
 # summary
